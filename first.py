@@ -33,6 +33,9 @@ for duck in range(20):
     duck_rect = duck_surface.get_rect(center = (duck_position_x, duck_position_y))
     duck_list.append(duck_rect)
 
+# Initialize crosshair_rect
+crosshair_rect = crosshair.get_rect(center=(640, 360))  # Start at the center
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -43,7 +46,7 @@ while True:
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             for index,duck_rect in enumerate(duck_list):
-                if  duck_rect.collidepoint(event.pos):  #crosshair_rect.colliderect(duck_rect):
+                if duck_rect.collidepoint(event.pos):
                     bulletSound.play()
                     del duck_list[index]
 
@@ -65,7 +68,7 @@ while True:
         water_speed *= -1
     screen.blit(water_bg, (0,water_position_y))
 
-    screen.blit(crosshair,crosshair_rect)
+    screen.blit(crosshair, crosshair_rect)  # Use crosshair_rect that was initialized
     screen.blit(cloud1, (300,100))
     screen.blit(cloud2, (150,50))
     screen.blit(cloud2, (600,20))
